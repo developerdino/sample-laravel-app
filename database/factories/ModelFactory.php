@@ -11,13 +11,35 @@
 |
 */
 
-$factory->define(App\User::class, function (Faker\Generator $faker) {
+$factory->define(
+    App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => $password ?: $password = bcrypt('secret'),
+        'name'           => $faker->name,
+        'email'          => $faker->safeEmail,
+        'password'       => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
     ];
-});
+}
+);
+
+$factory->define(
+    App\Category::class, function (Faker\Generator $faker) {
+    return [
+        'name' => $faker->words(3, true),
+    ];
+}
+);
+
+$factory->define(
+    App\Product::class, function (Faker\Generator $faker) {
+    $title = $faker->sentence(3);
+
+    return [
+        'title'       => $title,
+        'slug'        => str_replace(" ", "-", $title),
+        'description' => $faker->paragraphs(3, true),
+    ];
+}
+);
