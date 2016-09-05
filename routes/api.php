@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 
 /*
@@ -16,3 +18,8 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+Route::get('/categories', ['as' => 'api.categories.index', 'uses' => 'CategoryController@index']);
+Route::get('/categories/{id}', ['as' => 'api.categories.index', 'uses' => 'CategoryController@show']);
+Route::get('/products', ['as' => 'api.products.index', 'uses' => 'ProductController@index']);
+Route::get('/products/{id}', ['as' => 'api.products.index', 'uses' => 'ProductController@show']);
